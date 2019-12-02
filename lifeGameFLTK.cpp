@@ -77,6 +77,7 @@ protected:
     int cellSize_div2 = cellSize/2;
     int cellSize_div2_subt2 = cellSize/2-2;
     int button_height_add_SP = button_height+SP;
+    
     int handle(int e) {
         if (e == FL_PUSH){
             if((Fl::event_x() - SP) < 0 or (Fl::event_y() - (button_height_add_SP)) < 0)
