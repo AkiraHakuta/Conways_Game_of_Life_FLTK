@@ -74,53 +74,54 @@ void set_curr_time_ch() {
 
 class Screen : public Fl_Widget {
 protected:
-int handle(int e) {
-    if (e == FL_PUSH){
-    	if((Fl::event_x() - SP) < 0 or (Fl::event_y() - (button_height + SP)) < 0)
-    		return 0;
-        int x = (Fl::event_x() - SP) / cellSize;
-        int y = (Fl::event_y() - (button_height + SP)) / cellSize;
-        //cout << "(" << Fl::event_x() <<"," << Fl::event_y() << "), "<< "(x,y) = (" << x << "," << y << ")"  <<endl;
-        if (x < 0 or x > width-1 or y < 0 or y > height -1)
-            return 0;
-        if ((*(lg->curr_matrix))[x][y] == ALIVE)
-            lg->cell_change(lg->curr_matrix, x, y, DEAD);
-        else
-            lg->cell_change(lg->curr_matrix, x, y, ALIVE);
-        redraw();
-    }    
-    return 0;
-  }
-
+    int cellSize_div2 = cellSize/2;
+    int cellSize_div2_subt2 = cellSize/2-2;
+    int button_height_add_SP = button_height+SP;
+    int handle(int e) {
+        if (e == FL_PUSH){
+            if((Fl::event_x() - SP) < 0 or (Fl::event_y() - (button_height_add_SP)) < 0)
+                return 0;
+            int x = (Fl::event_x() - SP) / cellSize;
+            int y = (Fl::event_y() - (button_height_add_SP)) / cellSize;
+            //cout << "(" << Fl::event_x() <<"," << Fl::event_y() << "), "<< "(x,y) = (" << x << "," << y << ")"  <<endl;
+            if (x < 0 or x > width-1 or y < 0 or y > height -1)
+                return 0;
+            if ((*(lg->curr_matrix))[x][y] == ALIVE)
+                lg->cell_change(lg->curr_matrix, x, y, DEAD);
+            else
+                lg->cell_change(lg->curr_matrix, x, y, ALIVE);
+            redraw();
+        }    
+        return 0;
+    }
    
-void draw() {
-    fl_color(screen_color);
-    fl_rectf(SP, button_height+SP, screen_width, screen_height);
-   
-    fl_begin_line();
-    fl_color(line_color);
-    int y = button_height + SP;
-    for (int row = 0; row < height+1; row++)
-        fl_line(SP, y+row*cellSize, screen_width+SP, y+row*cellSize);
-    int x = 0;
-    for (int col = 0; col < width+1; col++)
-        fl_line(x+col*cellSize+10, 10+25, x+col*cellSize+10, screen_height+10+25);
-    fl_end_line();    
-    fl_color(alive_color);
-    for (int row = 0; row < height; row++)
-        for (int col = 0; col < width; col++){
-            if ((*(lg->curr_matrix))[col][row] == ALIVE){
-                fl_begin_polygon();
-                fl_arc(col*cellSize+10 +cellSize/2 , row*cellSize+10+25 +cellSize/2, cellSize/2-2, 0.0, 360.0);
-                fl_end_polygon();
-            }          
-        }     
+    void draw() {
+        fl_color(screen_color);
+        fl_rectf(SP, button_height+SP, screen_width, screen_height);
+       
+        fl_begin_line();
+        fl_color(line_color);
+        int y = button_height + SP;
+        for (int row = 0; row < height+1; row++)
+            fl_line(SP, y+row*cellSize, screen_width+SP, y+row*cellSize);
+        int x = 0;
+        for (int col = 0; col < width+1; col++)
+            fl_line(x+col*cellSize+10, 10+25, x+col*cellSize+10, screen_height+10+25);
+        fl_end_line();    
+        fl_color(alive_color);
+        for (int row = 0; row < height; row++)
+            for (int col = 0; col < width; col++){
+                if ((*(lg->curr_matrix))[col][row] == ALIVE){
+                    fl_begin_polygon();
+                    fl_arc(col*cellSize+10 +cellSize/2 , row*cellSize+10+25 +cellSize/2, cellSize/2-2, 0.0, 360.0);
+                    fl_end_polygon();
+                }          
+            }     
     }
 
 public:
     Screen(int X,int Y,int W,int H) : Fl_Widget(X,Y,W,H) {
-
-  }
+    }
 };
 
 Screen *lg_screen;
