@@ -34,8 +34,8 @@ int font_size = 14;
 int time_font_size = 16;
 int interval_slider_font_size = 10;
 
+string scheme_name = "gleam";
 
-int screen_width;
 int screen_height;
 int button_width;
 int button_height = 25;
@@ -347,11 +347,14 @@ int main(int argc, char **argv) {
         font_size = reader.GetInteger("font", "font_size", -1);
         time_font_size = reader.GetInteger("font", "time_font_size", -1);
         interval_slider_font_size = reader.GetInteger("font", "interval_slider_font_size", -1);
+        scheme_name = reader.Get("scheme", "scheme_name", "UNKNOWN");
     }
 
     screen_width = width * cellSize;
     screen_height = height * cellSize;
     button_width = screen_width/24;
+
+    Fl::scheme(scheme_name.c_str());
 
     char title[] = "Conway\'s Game of Life in FLTK";
     Fl_Double_Window *win = new Fl_Double_Window(screen_width + SP*2, screen_height+button_height+SP*2, title);
