@@ -36,6 +36,7 @@ int interval_slider_font_size = 10;
 
 string scheme_name = "gleam";
 
+int screen_width;
 int screen_height;
 int button_width;
 int button_height = 25;
