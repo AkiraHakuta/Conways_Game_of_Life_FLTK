@@ -324,8 +324,8 @@ void reset_button_cb(Fl_Widget *, void *v) {
 Fl_Menu_Item choices[] = {
     {"Trus", 0, choice_cb, (void*)TP_Torus},
     {"KleinBottle", 0, choice_cb, (void*)TP_KleinBottle},
-    {"twisted Cylinder", 0, choice_cb, (void*)TP_twisted_Cylinder},
-    {"twisted Torus", 0, choice_cb, (void*)TP_twisted_Torus},
+    {"1/2 twisted Cylinder", 0, choice_cb, (void*)TP_twisted_Cylinder},
+    {"1/3 twisted Torus", 0, choice_cb, (void*)TP_twisted_Torus},
     {0}
 };
 
@@ -371,9 +371,9 @@ int main(int argc, char **argv) {
 
     Fl_Box *slider_title = new Fl_Box(FL_FLAT_BOX,SP+button_width*6, 0, button_width*2, button_height, "Interval(sec):");
     slider_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
-    Fl_Hor_Value_Slider slider1(SP+button_width*8, 0, button_width*5, button_height, "");    
+    Fl_Hor_Value_Slider slider1(SP+button_width*8, 0, button_width*4.8, button_height, "");    
     
-    topology_choice = new Fl_Choice(SP+button_width*13, 0, button_width*3, button_height);
+    topology_choice = new Fl_Choice(SP+button_width*12.8, 0, button_width*3.2, button_height);
     
     open_filename_box = new Fl_Box(FL_FLAT_BOX, SP+button_width*16, 0, button_width*5.5, button_height, "");
     Fl_Box *time_count_box_title = new Fl_Box(FL_FLAT_BOX, screen_width - button_width*3 +SP, 0, button_width,button_height, "Time");
