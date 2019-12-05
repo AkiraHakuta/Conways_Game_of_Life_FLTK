@@ -108,14 +108,14 @@ protected:
             fl_line(SP, y+row*cellSize, screen_width+SP, y+row*cellSize);
         int x = 0;
         for (int col = 0; col < width+1; col++)
-            fl_line(x+col*cellSize+10, 10+25, x+col*cellSize+10, screen_height+10+25);
+            fl_line(x+col*cellSize+SP, SP+button_height, x+col*cellSize+SP, screen_height+SP+button_height);
         fl_end_line();    
         fl_color(alive_color);
         for (int row = 0; row < height; row++)
             for (int col = 0; col < width; col++){
                 if ((*(lg->curr_matrix))[col][row] == ALIVE){
                     fl_begin_polygon();
-                    fl_arc(col*cellSize+10 +cellSize/2 , row*cellSize+10+25 +cellSize/2, cellSize/2-2, 0.0, 360.0);
+                    fl_arc(col*cellSize+SP +cellSize/2 , row*cellSize+SP+button_height +cellSize/2, cellSize/2-2, 0.1, 360.0);
                     fl_end_polygon();
                 }          
             }     
