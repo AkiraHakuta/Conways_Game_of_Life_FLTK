@@ -129,6 +129,9 @@ font_name = arial
 font_size = 14
 time_font_size = 16
 interval_slider_font_size  = 12
+
+[scheme]
+scheme_name = gleam
 ```  
 
 See Demo  

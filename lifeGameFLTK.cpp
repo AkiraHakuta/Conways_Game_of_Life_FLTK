@@ -39,7 +39,7 @@ string scheme_name = "gleam";
 int screen_width;
 int screen_height;
 int button_width;
-int button_height = 25;
+int button_height = 30;
 int SP =10;
 
 LifeGame *lg;
