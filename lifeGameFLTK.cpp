@@ -203,7 +203,7 @@ string get_alive_points(){
     for (int y = 0; y < height; y++)
         for (int x = 0; x < width; x++){           
             if ((*(lg->curr_matrix))[x][y] == ALIVE){
-                cout << x << y << endl;
+                //cout << "(" << x << "," << y << ")" << endl;
                 buf += "(" + to_string(x) + "," + to_string(y) + ")\n"; 
             }                             
         }
