@@ -225,7 +225,8 @@ static void save_as_file(Fl_Widget *w, void *) {
     else if (result == 1)
         return;
     string fullfilename = fnfc.filename();
-    open_filename = GetFileName(fname);
+    open_filename = GetFileName(fullfilename);
+    string extension = GetExtension(open_filename);
     if (extension == ""){
         fullfilename += ".lg";
         open_filename += ".lg";
