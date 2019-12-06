@@ -175,7 +175,7 @@ static void open_file(Fl_Widget *w, void *) {
     fnfc.title("Open Game of Life file");
     fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
     fnfc.filter("Life of Game file\t*.lg");
-    fnfc.directory(".\\lgfiles\\");
+    fnfc.directory("./lgfiles/");
     int result = fnfc.show();
     if (result == -1){
         cout << "ERROR:" << fnfc.errmsg() << endl;
@@ -216,7 +216,7 @@ static void save_as_file(Fl_Widget *w, void *) {
     fnfc.title("Save As Game of Life file");
     fnfc.type(Fl_Native_File_Chooser::BROWSE_SAVE_FILE);
     fnfc.filter("Life of Game file\t*.lg");
-    fnfc.directory(".\\lgfiles\\");
+    fnfc.directory("./lgfiles/");
     int result = fnfc.show();
     if (result == -1){
         cout << "ERROR:" << fnfc.errmsg() << endl;
@@ -224,21 +224,19 @@ static void save_as_file(Fl_Widget *w, void *) {
     }
     else if (result == 1)
         return;
-    string fname = fnfc.filename();
-    string extension = GetExtension(fname);
-    if (extension == "")
-        fname += ".lg";
-    else if(extension != ".lg"){
-        int pos = fname.size() - extension.size();
-        fname.replace(pos,extension.size(),".lg");
+    string fullfilename = fnfc.filename();
+    open_filename = GetFileName(fname);
+    if (extension == ""){
+        fullfilename += ".lg";
+        open_filename += ".lg";
     }
-    ofstream ofs(fname);
+    ofstream ofs(fullfilename);
     if (!ofs) {
         cerr << "Failed to open file." << endl;
         return;
     }
     ofs << get_alive_points();
-    set_open_filename_box(GetFileName(fname));
+    set_open_filename_box(open_filename);
 }
 
 
