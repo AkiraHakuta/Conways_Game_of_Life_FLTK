@@ -175,7 +175,7 @@ static void open_file(Fl_Widget *w, void *) {
     fnfc.title("Open Game of Life file");
     fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
     fnfc.filter("Life of Game file\t*.lg");
-    fnfc.directory("./lgfiles/");
+    fnfc.directory(".\\lgfiles\\");
     int result = fnfc.show();
     if (result == -1){
         cout << "ERROR:" << fnfc.errmsg() << endl;
@@ -216,7 +216,7 @@ static void save_as_file(Fl_Widget *w, void *) {
     fnfc.title("Save As Game of Life file");
     fnfc.type(Fl_Native_File_Chooser::BROWSE_SAVE_FILE);
     fnfc.filter("Life of Game file\t*.lg");
-    fnfc.directory("./lgfiles/");
+    fnfc.directory(".\\lgfiles\\");
     int result = fnfc.show();
     if (result == -1){
         cout << "ERROR:" << fnfc.errmsg() << endl;
