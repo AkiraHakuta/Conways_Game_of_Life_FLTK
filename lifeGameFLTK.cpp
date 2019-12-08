@@ -11,6 +11,7 @@
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Native_File_Chooser.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Output.H>
 #include <FL/Fl_Value_Output.H>
 
 #include<fstream>
@@ -64,7 +65,7 @@ void reset();
 
 void set_open_filename_box(string text) {
     sprintf(File_open_filename, "File: %s", text.c_str()); 
-    open_filename_box->label(File_open_filename);
+    open_filename_box->value(File_open_filename);
 }
 
 
@@ -270,14 +271,14 @@ static void Timer_CB(void *data) {              // timer callback
 
 void play_pause_button_setPause(){
     Fl::remove_timeout(Timer_CB);
-    play_button->label("&Play");
+    play_button->label("@+3>");
     pause = true;
 }
         
 
 void play_pause_button_setStart(){
     Fl::add_timeout(interval, Timer_CB);
-    play_button->label("&Pause");
+    play_button->label("@+3||");
     pause = false; 
 }
 
@@ -352,7 +353,7 @@ int main(int argc, char **argv) {
 
     screen_width = width * cellSize;
     screen_height = height * cellSize;
-    button_width = screen_width/24;
+    button_width = screen_width/36;
 
     Fl::scheme(scheme_name.c_str());
 
@@ -361,24 +362,25 @@ int main(int argc, char **argv) {
     win->color(FL_DARK1);    
 
 
-    Fl_Menu_Button *filebar = new Fl_Menu_Button(SP, 0, button_width*2, button_height, "&File"); 
+    Fl_Menu_Button *filebar = new Fl_Menu_Button(SP, 0, button_width*3, button_height, "&File"); 
 
-    play_button = new Fl_Toggle_Button(SP+button_width*2, 0, button_width, button_height, "&Play");
-    Fl_Repeat_Button *nexttime_button = new Fl_Repeat_Button(SP+button_width*3, 0, button_width, button_height, "Nex&t");
-    Fl_Repeat_Button *prevtime_button = new Fl_Repeat_Button(SP+button_width*4, 0, button_width,button_height, "Pre&v");
-    Fl_Button *reset_button = new Fl_Button(SP+button_width*5, 0, button_width, button_height, "&Reset");
+    play_button = new Fl_Toggle_Button(SP+button_width*3, 0, button_width*1.5, button_height, "@+3>");
+    Fl_Repeat_Button *nexttime_button = new Fl_Repeat_Button(SP+button_width*4.5, 0, button_width, button_height, "@+3>|");
+    Fl_Repeat_Button *prevtime_button = new Fl_Repeat_Button(SP+button_width*5.5, 0, button_width,button_height, "@+3|<");
+    Fl_Button *reset_button = new Fl_Button(SP+button_width*6.5, 0, button_width, button_height, "@+3refresh");
 
-    Fl_Box *slider_title = new Fl_Box(FL_FLAT_BOX,SP+button_width*6, 0, button_width*2, button_height, "Interval(sec):");
+    Fl_Box *slider_title = new Fl_Box(FL_FLAT_BOX,SP+button_width*7.5, 0, button_width*3, button_height, "Interval(sec):");
     slider_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
-    Fl_Hor_Value_Slider slider1(SP+button_width*8, 0, button_width*4.8, button_height, "");    
+    Fl_Hor_Value_Slider slider1(SP+button_width*10.5, 0, button_width*8, button_height, "");    
     
-    topology_choice = new Fl_Choice(SP+button_width*12.8, 0, button_width*3.2, button_height);
+    topology_choice = new Fl_Choice(SP+button_width*18.5, 0, button_width*5, button_height);
     
-    open_filename_box = new Fl_Box(FL_FLAT_BOX, SP+button_width*16, 0, button_width*5.5, button_height, "");
-    Fl_Box *time_count_box_title = new Fl_Box(FL_FLAT_BOX, screen_width - button_width*3 +SP, 0, button_width,button_height, "Time");
+    open_filename_box = new Fl_Output(SP+button_width*23.5, 0, button_width*8, button_height);
+    int next_widget_pos = SP+button_width*23.5 + button_width*8;
+    Fl_Box *time_count_box_title = new Fl_Box(FL_FLAT_BOX, next_widget_pos, 0, button_width*1.5, button_height, "Time:");
     time_count_box_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
-
-    time_count_box = new Fl_Value_Output(screen_width - button_width*2 +SP, 0, button_width*2, button_height, "");
+    next_widget_pos += button_width*1.5;
+    time_count_box = new Fl_Value_Output(next_widget_pos, 0, screen_width+SP-next_widget_pos, button_height, "");
     time_count_box->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
 
 
