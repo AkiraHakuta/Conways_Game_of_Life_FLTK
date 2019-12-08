@@ -425,7 +425,7 @@ int main(int argc, char **argv) {
     slider_title->labelsize(font_size);
     topology_choice->textsize(font_size);
     time_count_box_title->labelsize(font_size);
-    open_filename_box->labelsize(font_size);
+    open_filename_output->labelsize(font_size);
 
     win->end();
     win->show();    
