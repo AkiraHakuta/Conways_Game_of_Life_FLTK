@@ -56,16 +56,16 @@ int topology_nr = TP_Torus;
 Fl_Value_Output* time_count_box;
 char File_open_filename[128];
 
-Fl_Box* open_filename_box;
+Fl_Output* open_filename_output;
 string open_filename;
 
 void play_pause_button_setPause();
 void reset();
 
 
-void set_open_filename_box(string text) {
+void set_open_filename_output(string text) {
     sprintf(File_open_filename, "File: %s", text.c_str()); 
-    open_filename_box->value(File_open_filename);
+    open_filename_output->value(File_open_filename);
 }
 
 
@@ -195,7 +195,7 @@ static void open_file(Fl_Widget *w, void *) {
     play_pause_button_setPause();
     if (pause)
         play_button->value(0);
-    set_open_filename_box(GetFileName(open_filename));
+    set_open_filename_output(GetFileName(open_filename));
 }
 
 
@@ -238,7 +238,7 @@ static void save_as_file(Fl_Widget *w, void *) {
         return;
     }
     ofs << get_alive_points();
-    set_open_filename_box(open_filename);
+    set_open_filename_output(open_filename);
 }
 
 
@@ -311,7 +311,7 @@ void reset(){
     play_pause_button_setPause();
     if (pause)
         play_button->value(0);
-    set_open_filename_box("No name");
+    set_open_filename_output("No name");
 
 }
 
@@ -375,7 +375,7 @@ int main(int argc, char **argv) {
     
     topology_choice = new Fl_Choice(SP+button_width*18.5, 0, button_width*5, button_height);
     
-    open_filename_box = new Fl_Output(SP+button_width*23.5, 0, button_width*8, button_height);
+    open_filename_output = new Fl_Output(SP+button_width*23.5, 0, button_width*8, button_height);
     int next_widget_pos = SP+button_width*23.5 + button_width*8;
     Fl_Box *time_count_box_title = new Fl_Box(FL_FLAT_BOX, next_widget_pos, 0, button_width*1.5, button_height, "Time:");
     time_count_box_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
@@ -408,8 +408,8 @@ int main(int argc, char **argv) {
     interval_slider->textsize(interval_slider_font_size);
     
     open_filename = "No name";
-    set_open_filename_box(open_filename);
-    open_filename_box->align(FL_ALIGN_INSIDE|FL_ALIGN_LEFT);    
+    set_open_filename_output(open_filename);
+    open_filename_output->align(FL_ALIGN_INSIDE|FL_ALIGN_LEFT);    
 
     nexttime_button->callback(nexttime_button_cb);    
     prevtime_button->callback(prevtime_button_cb);    
