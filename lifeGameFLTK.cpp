@@ -322,7 +322,7 @@ void reset_button_cb(Fl_Widget *, void *v) {
 
 
 Fl_Menu_Item choices[] = {
-    {"Trus", 0, choice_cb, (void*)TP_Torus},
+    {"Torus", 0, choice_cb, (void*)TP_Torus},
     {"KleinBottle", 0, choice_cb, (void*)TP_KleinBottle},
     {"1/2 twisted Cylinder", 0, choice_cb, (void*)TP_twisted_Cylinder},
     {"1/3 twisted Torus", 0, choice_cb, (void*)TP_twisted_Torus},
