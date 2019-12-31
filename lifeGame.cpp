@@ -348,7 +348,7 @@ int main() {
 
     lgame.reset_game();
     lgame.set_curr_matrix(&list);
-    cout << "TP_twist_Cylinder" << endl;
+    cout << "TP_twisted_Cylinder" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
     	lgame.next_time(TP_twisted_Cylinder);
@@ -357,7 +357,7 @@ int main() {
 
     lgame.reset_game();
     lgame.set_curr_matrix(&list);
-    cout << "TP_twist_Torus" << endl;
+    cout << "TP_twisted_Torus" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
     	lgame.next_time(TP_twisted_Torus);
