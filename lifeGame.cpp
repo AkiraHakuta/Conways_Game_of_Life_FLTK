@@ -351,7 +351,7 @@ int main() {
     cout << "TP_twist_Cylinder" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_twist_Cylinder);
+    	lgame.next_time(TP_twisted_Cylinder);
     	lgame.curr_matrix_print();  
     }
 
@@ -360,7 +360,7 @@ int main() {
     cout << "TP_twist_Torus" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_twist_Torus);
+    	lgame.next_time(TP_twisted_Torus);
     	lgame.curr_matrix_print();  
     }
 
