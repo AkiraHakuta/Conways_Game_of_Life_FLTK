@@ -11,7 +11,7 @@ const int ALIVE = 1;
 const int DEAD = 0;
 
 //topology_nr
-enum {TP_Torus, TP_KleinBottle, TP_twisted_Cylinder,TP_twisted_Torus};
+enum {TP_Torus, TP_KleinBottle, TP_twisted_Cylinder, TP_twisted_Torus};
 
 class LifeGame{
 private:	
@@ -46,13 +46,13 @@ public:
 		set_curr_matrix(&list);/**/
 	};
 
-	int curr_time = 0;	
+	int curr_gen = 0;	
 	void reset_game();	
 	void curr_matrix_print();
 	void set_curr_matrix(vector<vector<int>>* list);
 		
-	void next_time(int mode);
-	void prev_time();
+	void next_gen(int mode);
+	void prev_gen();
 	void cell_change(vector<vector<int>>* matrix, int x, int y, int live_dead);
 };
 

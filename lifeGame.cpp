@@ -11,7 +11,7 @@ int LifeGame::get_y_size(){
 
 
 void LifeGame::reset_game(){
-	curr_time = 0;
+	curr_gen = 0;
 	set_all_dead(curr_matrix);
 	set_all_dead(next_matrix);
 	set_all_dead(prev_matrix);
@@ -29,7 +29,7 @@ void LifeGame::create_matrix(vector<vector<int>>* matrix){
 
 
 void LifeGame::curr_matrix_print(){
-	cout << "curr_time=" << curr_time << endl;
+	cout << "curr_gen=" << curr_gen << endl;
 	for(int y = 0; y < _y_size; y++){
 		for (int x = 0; x < _x_size; x++)
 			cout << (*curr_matrix)[x][y] ;
@@ -290,8 +290,8 @@ void LifeGame::copy_matrix(vector<vector<int>>* src, vector<vector<int>>* dest){
 }
 
 
-void LifeGame::next_time(int mode){
-	curr_time++;
+void LifeGame::next_gen(int mode){
+	curr_gen++;
 	stack_matrix.push(*curr_matrix);
 	set_all_dead(next_matrix);
 	for(int y = 0; y < _y_size; y++){
@@ -303,15 +303,15 @@ void LifeGame::next_time(int mode){
 }
 
 
-void LifeGame::prev_time(){
-	if (curr_time < 1)
+void LifeGame::prev_gen(){
+	if (curr_gen < 1)
 		return;
 	if (stack_matrix.empty())
 		return;
 	vector<vector<int>> prev_matrix = stack_matrix.top();
 	stack_matrix.pop();
 	copy_matrix(&prev_matrix, curr_matrix);
-	curr_time--;
+	curr_gen--;
 }
 
 
@@ -329,11 +329,11 @@ int main() {
 	cout << "TP_Torus" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_Torus);
+    	lgame.next_gen(TP_Torus);
     	lgame.curr_matrix_print();  
     }
     for (int i; i < 20; i++){
-    	lgame.prev_time();
+    	lgame.prev_gen();
     	lgame.curr_matrix_print();  
     }
 
@@ -342,7 +342,7 @@ int main() {
     cout << "TP_KleinBottle" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_KleinBottle);
+    	lgame.next_gen(TP_KleinBottle);
     	lgame.curr_matrix_print();  
     }
 
@@ -351,7 +351,7 @@ int main() {
     cout << "TP_twisted_Cylinder" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_twisted_Cylinder);
+    	lgame.next_gen(TP_twisted_Cylinder);
     	lgame.curr_matrix_print();  
     }
 
@@ -360,7 +360,7 @@ int main() {
     cout << "TP_twisted_Torus" << endl;
 	lgame.curr_matrix_print();  
     for (int i; i < 20; i++){
-    	lgame.next_time(TP_twisted_Torus);
+    	lgame.next_gen(TP_twisted_Torus);
     	lgame.curr_matrix_print();  
     }
 

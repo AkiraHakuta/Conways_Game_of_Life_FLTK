@@ -32,7 +32,7 @@ int line_color = FL_BLACK;
 
 string font_name= "arial";
 int font_size = 14;
-int time_font_size = 16;
+int gen_font_size = 16;
 int interval_slider_font_size = 10;
 
 string scheme_name = "gleam";
@@ -53,7 +53,7 @@ double interval = 0.1;
 Fl_Choice *topology_choice;
 int topology_nr = TP_Torus;
 
-Fl_Value_Output* time_count_box;
+Fl_Value_Output* gen_count_box;
 char File_open_filename[128];
 
 Fl_Output* open_filename_output;
@@ -69,8 +69,8 @@ void set_open_filename_output(string text) {
 }
 
 
-void set_curr_time_ch() {
-    time_count_box->value(lg->curr_time);
+void set_curr_gen_ch() {
+    gen_count_box->value(lg->curr_gen);
 }
 
 
@@ -191,7 +191,7 @@ static void open_file(Fl_Widget *w, void *) {
         reset();
         return;
     }
-    set_curr_time_ch();
+    set_curr_gen_ch();
     play_pause_button_setPause();
     if (pause)
         play_button->value(0);
@@ -247,25 +247,25 @@ static void quit(Fl_Widget *w, void *) {
 }
 
 
-void nexttime_button_cb(Fl_Widget *,void *) {
-    lg->next_time(topology_nr);
+void nextgen_button_cb(Fl_Widget *,void *) {
+    lg->next_gen(topology_nr);
     lg_screen->redraw();
-    set_curr_time_ch();
+    set_curr_gen_ch();
 }
 
 
-void prevtime_button_cb(Fl_Widget *,void *) {
-    lg->prev_time();
+void prevgen_button_cb(Fl_Widget *,void *) {
+    lg->prev_gen();
     lg_screen->redraw();
-    set_curr_time_ch();
+    set_curr_gen_ch();
 }
 
 
 static void Timer_CB(void *data) {              // timer callback
-    lg->next_time(topology_nr);
+    lg->next_gen(topology_nr);
     lg_screen->redraw();
     Fl::repeat_timeout(interval, Timer_CB, data);
-    set_curr_time_ch();
+    set_curr_gen_ch();
 }
 
 
@@ -305,7 +305,7 @@ void choice_cb(Fl_Widget *, void *v) {
 void reset(){
     lg->reset_game();
     lg_screen->redraw();
-    set_curr_time_ch();
+    set_curr_gen_ch();
     topology_nr = TP_Torus;
     topology_choice->value(TP_Torus);
     play_pause_button_setPause();
@@ -346,7 +346,7 @@ int main(int argc, char **argv) {
         line_color = reader.GetInteger("color", "line_color", -1);
         font_name = reader.Get("font", "font_name", "UNKNOWN");
         font_size = reader.GetInteger("font", "font_size", -1);
-        time_font_size = reader.GetInteger("font", "time_font_size", -1);
+        gen_font_size = reader.GetInteger("font", "gen_font_size", -1);
         interval_slider_font_size = reader.GetInteger("font", "interval_slider_font_size", -1);
         scheme_name = reader.Get("scheme", "scheme_name", "UNKNOWN");
     }
@@ -365,8 +365,8 @@ int main(int argc, char **argv) {
     Fl_Menu_Button *filebar = new Fl_Menu_Button(SP, 0, button_width*3, button_height, "&File"); 
 
     play_button = new Fl_Toggle_Button(SP+button_width*3, 0, button_width*1.5, button_height, "@+3>");
-    Fl_Repeat_Button *nexttime_button = new Fl_Repeat_Button(SP+button_width*4.5, 0, button_width, button_height, "@+3>|");
-    Fl_Repeat_Button *prevtime_button = new Fl_Repeat_Button(SP+button_width*5.5, 0, button_width,button_height, "@+3|<");
+    Fl_Repeat_Button *nextgen_button = new Fl_Repeat_Button(SP+button_width*4.5, 0, button_width, button_height, "@+3>|");
+    Fl_Repeat_Button *prevgen_button = new Fl_Repeat_Button(SP+button_width*5.5, 0, button_width,button_height, "@+3|<");
     Fl_Button *reset_button = new Fl_Button(SP+button_width*6.5, 0, button_width, button_height, "@+3refresh");
 
     Fl_Box *slider_title = new Fl_Box(FL_FLAT_BOX,SP+button_width*7.5, 0, button_width*3, button_height, "Interval(sec):");
@@ -375,14 +375,13 @@ int main(int argc, char **argv) {
     
     topology_choice = new Fl_Choice(SP+button_width*18.5, 0, button_width*5, button_height);
     
-    open_filename_output = new Fl_Output(SP+button_width*23.5, 0, button_width*8, button_height);
-    int next_widget_pos = SP+button_width*23.5 + button_width*8;
-    Fl_Box *time_count_box_title = new Fl_Box(FL_FLAT_BOX, next_widget_pos, 0, button_width*1.5, button_height, "Time:");
-    time_count_box_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
-    next_widget_pos += button_width*1.5;
-    time_count_box = new Fl_Value_Output(next_widget_pos, 0, screen_width+SP-next_widget_pos, button_height, "");
-    time_count_box->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
-
+    open_filename_output = new Fl_Output(SP+button_width*23.5, 0, button_width*7, button_height);
+    int next_widget_pos = SP+button_width*23.5 + button_width*7;
+    Fl_Box *gen_count_box_title = new Fl_Box(FL_FLAT_BOX, next_widget_pos, 0, button_width*2.5, button_height, "Generation:");
+    gen_count_box_title->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
+    next_widget_pos += button_width*2.5;
+    gen_count_box = new Fl_Value_Output(next_widget_pos, 0, screen_width+SP-next_widget_pos, button_height, "");
+    gen_count_box->align(FL_ALIGN_INSIDE|FL_ALIGN_RIGHT);
 
     filebar->add("&Open",  "^o", open_file);
     filebar->add("save&As",  "^a", save_as_file, 0, FL_MENU_DIVIDER);
@@ -402,29 +401,29 @@ int main(int argc, char **argv) {
     
     topology_choice->menu(choices); 
     
-    set_curr_time_ch();
-    time_count_box->align(FL_ALIGN_INSIDE|FL_ALIGN_LEFT);
-    time_count_box->textsize(time_font_size);
+    set_curr_gen_ch();
+    gen_count_box->align(FL_ALIGN_INSIDE|FL_ALIGN_LEFT);
+    gen_count_box->textsize(gen_font_size);
     interval_slider->textsize(interval_slider_font_size);
     
     open_filename = "No name";
     set_open_filename_output(open_filename);
     open_filename_output->align(FL_ALIGN_INSIDE|FL_ALIGN_LEFT);    
 
-    nexttime_button->callback(nexttime_button_cb);    
-    prevtime_button->callback(prevtime_button_cb);    
+    nextgen_button->callback(nextgen_button_cb);    
+    prevgen_button->callback(prevgen_button_cb);    
     play_button->callback(play_button_cb);    
     reset_button->callback(reset_button_cb);
 
     Fl::set_font(FL_HELVETICA, font_name.c_str());
     filebar->labelsize(font_size);
     play_button->labelsize(font_size);
-    nexttime_button->labelsize(font_size);
-    prevtime_button->labelsize(font_size);
+    nextgen_button->labelsize(font_size);
+    prevgen_button->labelsize(font_size);
     reset_button->labelsize(font_size);
     slider_title->labelsize(font_size);
     topology_choice->textsize(font_size);
-    time_count_box_title->labelsize(font_size);
+    gen_count_box_title->labelsize(font_size);
     open_filename_output->labelsize(font_size);
 
     win->end();
