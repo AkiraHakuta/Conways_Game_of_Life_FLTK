@@ -127,7 +127,7 @@ line_color = 56
 [font]
 font_name = arial
 font_size = 14
-time_font_size = 16
+gen_font_size = 16
 interval_slider_font_size  = 12
 
 [scheme]
