@@ -1,7 +1,7 @@
 ## Conway's Game of Life in FLTK  
 
 ### Demo  
-4 types of topologies supported : Torus, Klein Bottle, 1/2 twisted Cylinder, 1/3 twisted Torus  
+5 types of topologies supported : Torus, Klein Bottle, 1/2 twisted Cylinder, 1/3 twisted Torus, closed Rectangle  
 
 Torus:  
 Top and bottom edges correspond, and right and left edges also correspond.    
@@ -23,6 +23,13 @@ Top and bottom edges correspond, and right edge is connected with the same edge 
 Top and bottom edges correspond, and right edge is connected with left edge one third twisted.  
 
 ![demo4](./demos/demo4.gif) 
+
+
+closed Rectangle:  
+Cells beyond the grid boundary are always treated as if they were dead.  
+
+![demo5](./demos/demo5.gif) 
+
  
 ### About Conway's Game of Life 
 Conway's Game of Life is a cellular automata.  
