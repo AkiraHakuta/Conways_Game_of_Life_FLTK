@@ -11,7 +11,7 @@ const int ALIVE = 1;
 const int DEAD = 0;
 
 //topology_nr
-enum {TP_Torus, TP_KleinBottle, TP_twisted_Cylinder, TP_twisted_Torus};
+enum {TP_Torus, TP_Klein_Bottle, TP_twisted_Cylinder, TP_twisted_Torus, TP_closed_Rectangle};
 
 class LifeGame{
 private:	
@@ -23,8 +23,9 @@ private:
 	void create_matrix(vector<vector<int>>* matrix);
 	int arround_alive_num_Torus(int x1, int y1);
 	int arround_alive_num_KleinBT(int x1, int y1);
-	int arround_alive_num_twist_Cylinder(int x1, int y1);
-	int arround_alive_num_twist_Torus(int x1, int y1);
+	int arround_alive_num_twisted_Cylinder(int x1, int y1);
+	int arround_alive_num_twisted_Torus(int x1, int y1);
+	int arround_alive_num_closed_Rectangle(int x1, int y1);
 	void rule(int x, int y, int mode);
 	void copy_matrix(vector<vector<int>>* src, vector<vector<int>>* dest);
 	void set_all_dead(vector<vector<int>>* matrix);

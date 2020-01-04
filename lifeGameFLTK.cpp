@@ -261,7 +261,7 @@ void prevgen_button_cb(Fl_Widget *,void *) {
 }
 
 
-static void Timer_CB(void *data) {              // timer callback
+static void Timer_CB(void *data) {
     lg->next_gen(topology_nr);
     lg_screen->redraw();
     Fl::repeat_timeout(interval, Timer_CB, data);
@@ -306,8 +306,8 @@ void reset(){
     lg->reset_game();
     lg_screen->redraw();
     set_curr_gen_ch();
-    topology_nr = TP_Torus;
-    topology_choice->value(TP_Torus);
+    //topology_nr = TP_Torus;
+    //topology_choice->value(TP_Torus);
     play_pause_button_setPause();
     if (pause)
         play_button->value(0);
@@ -323,9 +323,10 @@ void reset_button_cb(Fl_Widget *, void *v) {
 
 Fl_Menu_Item choices[] = {
     {"Torus", 0, choice_cb, (void*)TP_Torus},
-    {"KleinBottle", 0, choice_cb, (void*)TP_KleinBottle},
+    {"Klein Bottle", 0, choice_cb, (void*)TP_Klein_Bottle},
     {"1/2 twisted Cylinder", 0, choice_cb, (void*)TP_twisted_Cylinder},
     {"1/3 twisted Torus", 0, choice_cb, (void*)TP_twisted_Torus},
+    {"closed Rectangle", 0, choice_cb, (void*)TP_closed_Rectangle},
     {0}
 };
 
